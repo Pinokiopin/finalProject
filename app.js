@@ -55,24 +55,6 @@ app.get('/post', async (req, res) => {
 });
 
 
-//CRUD
-router.get('/admin', AdminController.dashboard);
-
-// Admin users route
-router.get('/admin/users', AdminController.getAllUsers);
-router.get('/admin/users/:id', AdminController.getUserById);
-router.post('/admin/users', AdminController.createUser);
-router.put('/admin/users/:id', AdminController.updateUser);
-router.delete('/admin/users/:id', AdminController.deleteUser);
-
-// Admin posts route
-router.get('/admin/posts', AdminController.getAllPosts);
-router.get('/admin/posts/:id', AdminController.getPostById);
-router.post('/admin/posts', AdminController.createPost);
-router.put('/admin/posts/:id', AdminController.updatePost);
-router.delete('/admin/posts/:id', AdminController.deletePost);
-
-module.exports = router;
 
 // User CRUD Endpoints
 
