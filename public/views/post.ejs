@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Management</title>
+</head>
+<body>
+    <h1>Post Management</h1>
+
+    <!-- Form for creating a new post -->
+    <form id="postForm">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+
+        <label for="body">Body:</label>
+        <textarea id="body" name="body" required></textarea>
+
+        <button type="button" onclick="createPost()">Create Post</button>
+    </form>
+
+    <!-- Table for displaying posts -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Body</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="postTableBody"></tbody>
+    </table>
+
+    <script src="/public/js/post.js"></script>
+</body>
+</html>

@@ -1,54 +1,93 @@
-const collection = require("./mongodb");
+require('dotenv').config();
 
 const express = require('express');
-const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
+const path = require('path'); 
 const User = require('./server/models/User'); // Import the User schema
 const Post = require('./server/models/Post'); // Import the Post schema
+
+
+const router = express.Router();
+const AdminController = require('./controllers/AdminController');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Connect to DB
 try {
-  mongoose.connect(process.env.MONGODB_URL, {});
-
+  mongoose.connect(process.env.MONGODB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
   console.log('Connected to MongoDB');
 } catch (error) {
   console.error('MongoDB connection error:', error.message);
-  process.exit(1); // Exit the application if the connection fails
+  process.exit(1);
 }
 
-app.use(express.static('public'));
-
-// Templating Engine
-app.use(expressLayouts);
-app.set('layout', './layouts/main');
-app.set('view engine', 'ejs');
-
-// Body Parser Middleware
-app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "public/views"));
+app.use(express.urlencoded({ extended: true })); 
+app.use(express.json())
 
 app.get('/', async (req, res) => {
-  res.render('./layouts/main');
+  res.render('signup');
 });
+
+app.get('/main', async (req, res) => {
+  res.render('main');
+});
+
+app.get('/contact', async (req, res) => {
+  res.render('contact');
+});
+
+app.get('/about', async (req, res) => {
+  res.render('about');
+});
+
+app.get('/login', async (req, res) => {
+  res.render('login');
+});
+app.get('/post', async (req, res) => {
+  res.render('post');
+});
+
+
+//CRUD
+router.get('/admin', AdminController.dashboard);
+
+// Admin users route
+router.get('/admin/users', AdminController.getAllUsers);
+router.get('/admin/users/:id', AdminController.getUserById);
+router.post('/admin/users', AdminController.createUser);
+router.put('/admin/users/:id', AdminController.updateUser);
+router.delete('/admin/users/:id', AdminController.deleteUser);
+
+// Admin posts route
+router.get('/admin/posts', AdminController.getAllPosts);
+router.get('/admin/posts/:id', AdminController.getPostById);
+router.post('/admin/posts', AdminController.createPost);
+router.put('/admin/posts/:id', AdminController.updatePost);
+router.delete('/admin/posts/:id', AdminController.deletePost);
+
+module.exports = router;
 
 // User CRUD Endpoints
 
-// Create a new user
 app.post('/signup', async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const user = new User({ name, email, password });
     await user.save();
-    res.redirect('/users');
+    res.redirect('/main');
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');
   }
 });
 
-// Read all users
 app.get('/users', async (req, res) => {
   try {
     const users = await User.find();
@@ -59,7 +98,6 @@ app.get('/users', async (req, res) => {
   }
 });
 
-// Read a specific user
 app.get('/users/:id', async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -70,7 +108,6 @@ app.get('/users/:id', async (req, res) => {
   }
 });
 
-// Update a user
 app.put('/users/:id', async (req, res) => {
   try {
     const { name, email } = req.body;
@@ -86,7 +123,6 @@ app.put('/users/:id', async (req, res) => {
   }
 });
 
-// Delete a user
 app.delete('/users/:id', async (req, res) => {
   try {
     await User.findByIdAndDelete(req.params.id);
@@ -99,8 +135,6 @@ app.delete('/users/:id', async (req, res) => {
 
 // Post CRUD Endpoints
 
-
-// Create a new post
 app.post('/posts', async (req, res) => {
   try {
     const { title, body } = req.body;
@@ -113,7 +147,6 @@ app.post('/posts', async (req, res) => {
   }
 });
 
-// Read all posts
 app.get('/posts', async (req, res) => {
   try {
     const posts = await Post.find();
@@ -124,7 +157,6 @@ app.get('/posts', async (req, res) => {
   }
 });
 
-// Read a specific post
 app.get('/posts/:id', async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -135,7 +167,6 @@ app.get('/posts/:id', async (req, res) => {
   }
 });
 
-//login
 app.post("/login", async (req, res) => {
   try {
     const exist = await collection.findOne({ name: req.body.name });
@@ -157,7 +188,6 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// Update a post
 app.put('/posts/:id', async (req, res) => {
   try {
     const { title, body } = req.body;
@@ -173,7 +203,6 @@ app.put('/posts/:id', async (req, res) => {
   }
 });
 
-// Delete a post
 app.delete('/posts/:id', async (req, res) => {
   try {
     await Post.findByIdAndDelete(req.params.id);

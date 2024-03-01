@@ -1,0 +1,92 @@
+<!-- login.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' http://localhost:3000/ https://fonts.googleapis.com; style-src 'self' https://fonts.googleapis.com;">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Login</title>
+    
+</head>
+<body>
+    <h1>Login Page</h1>
+    <form action="/login" method="post">
+        <label for="name">Username:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit" class="btn-login">Login</button>
+    </form>
+    <p>Don't have an account? <a href="/signup">Register</a></p>
+
+    <style>
+        /* login.css */
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--black);
+            font-size: var(--font-size-base);
+            background-color: #FAF5EE;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: var(--font-size-xl);
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            font-family: 'Poppins', sans-serif;
+            font-size: var(--font-size-base);
+            display: block;
+            box-sizing: border-box;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+        }
+
+        .btn-login {
+            background-color: var(--black);
+            color: white;
+            padding: 12px 20px;
+            font-size: var(--font-size-md);
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-login:hover {
+            background-color: #333; /* Darken the background on hover */
+        }
+
+        p {
+            margin-top: 16px;
+        }
+
+        a {
+            color: var(--black);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</body>
+</html>

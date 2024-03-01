@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= locals.title %></title>
-    <meta name="description" content="<%= locals.description %>">
+    <title>Title</title>
+    <meta name="description" content="Description">
     <link rel="stylesheet" href="/css/style.css">
     <script type="text/javascript" defer src="/js/script.js"></script>
 </head>
@@ -38,7 +38,7 @@
                 <nav class="header__nav">
                     <ul>
                         <li>
-                            <a href="/" class="">Home</a>
+                            <a href="/main" class="">Home</a>
                         </li>
                         <li>
                             <a href="/about" class="">About</a>
@@ -96,7 +96,8 @@
         
         </section>
         
-
+        <a href="/post" class="redirect-btn">Go to Post Page</a>
+        
         <!-- Include Footer Partial -->
         <footer class="footer">
             &copy; <%- new Date().getFullYear();  %> Assylbek * Build with NodeJs & MongoDb
