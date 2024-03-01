@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= locals.title %></title>
+    <meta name="description" content="<%= locals.description %>">
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" defer src="/js/script.js"></script>
+</head>
+<body>
+
+    <!-- Include Search Partial -->
+    <div class="searchBar">
+        <div class="container">
+            <form action="/search" class="search__form" role="search" method="POST">
+    
+                <input 
+                type="text"
+                aria-label="Search"
+                id="searchInput"
+                name="searchTerm"
+                placeholder="Search the site...">
+    
+            </form>
+            <div id="searchClose">Close</div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Include Header Partial -->
+        <header class="header">
+           
+                <a href="/" class="header__logo">NodeJs</a>
+                
+                <nav class="header__nav">
+                    <ul>
+                        <li>
+                            <a href="/" class="">Home</a>
+                        </li>
+                        <li>
+                            <a href="/about" class="">About</a>
+                        </li>
+                        <li>
+                            <a href="/contact" class="">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            
+                <div class="header__button">
+                    <button class="searchBtn" aria-expanded="false">
+                        Search
+            
+                    </button>
+                </div>
+            
+        </header>
+
+        <!-- Main Content -->
+        <div class="author">
+            <h1 class="author__heading">Hi, I am Assylbek</h1>
+            <p class="author__body">Student of Astana IT University</p>
+        </div>
+        
+        <img src="/img/pic2.jpg" alt="cringe" class="cringe-image" width="981" height="528">
+        
+        <section class="articles">
+            <h2 class="articles__heading">Latest Posts</h2>
+        
+            <ul class="article-ul">
+                <!-- Replace EJS forEach with plain HTML -->
+                <!-- Loop through your data array and generate list items -->
+                <!-- Make sure to adjust the URL and content accordingly -->
+                <!-- Use JavaScript or another templating engine for dynamic content -->
+                <!-- This is a simplified static version -->
+                <li>
+                    <a href="/post/1">
+                        <span>Title 1</span>
+                        <span class="article-list__date">Date 1</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/post/2">
+                        <span>Title 2</span>
+                        <span class="article-list__date">Date 2</span>
+                    </a>
+                </li>
+                <!-- Add more list items as needed -->
+            </ul>
+        
+            <!-- Replace EJS if statement with plain HTML -->
+            <!-- Check if nextPage is not null, then show the link -->
+            <a href="/?page=2" class="pagination">&lt; View Older Posts</a>
+        
+        </section>
+        
+
+        <!-- Include Footer Partial -->
+        <footer class="footer">
+            &copy; <%- new Date().getFullYear();  %> Assylbek * Build with NodeJs & MongoDb
+        </footer>
+
+    </div>
+   
+</body>
+</html>
