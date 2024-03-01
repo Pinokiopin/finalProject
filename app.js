@@ -8,7 +8,7 @@ const Post = require('./server/models/Post'); // Import the Post schema
 
 
 const router = express.Router();
-const AdminController = require('./controllers/AdminController');
+//const AdminController = require('./controllers/AdminController');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
